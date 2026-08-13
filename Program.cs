@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MiPrimerAPI.Data;
+using MiPrimerAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddHttpClient<ExternalApiService>();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
