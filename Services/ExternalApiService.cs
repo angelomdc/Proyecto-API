@@ -1,5 +1,6 @@
-﻿using MiPrimerAPI.Models;
-using System.Net.Http.Json;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
+using System;
 
 namespace MiPrimerAPI.Services
 {
@@ -14,14 +15,15 @@ namespace MiPrimerAPI.Services
 
         public async Task<string> GetUsersAsync()
         {
-            var response = await _httpClient.GetAsync("https://reqres.in/api/users?page=1");
-
+            // Usamos otra URL pública que nunca bloquea las conexiones para probar
+            var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
+            
             if (!response.IsSuccessStatusCode)
-                throw new Exception("Error al consumir la API externa de usuarios");
-
+            {
+                throw new Exception($"Error de conexión. Código: {response.StatusCode}");
+            }
+                
             return await response.Content.ReadAsStringAsync();
         }
     }
 }
-
-

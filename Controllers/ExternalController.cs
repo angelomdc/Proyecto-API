@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MiPrimerAPI.Services;
+using System.Threading.Tasks;
 
 namespace MiPrimerAPI.Controllers
 {
@@ -17,6 +18,7 @@ namespace MiPrimerAPI.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> GetUsers()
         {
+            // Aquí usamos _apiService (NO _httpClient)
             var result = await _apiService.GetUsersAsync();
             return Ok(result);
         }
